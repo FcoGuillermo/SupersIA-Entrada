@@ -1,2 +1,0 @@
-# FcoGuillermo.github.io
-SupersIA
