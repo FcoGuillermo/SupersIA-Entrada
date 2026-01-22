@@ -6,7 +6,7 @@ module.exports = async function handler(req, res) {
   const { message } = req.body;
 
   try {
-    const systemPrompt = `Eres el Director de Juego de "Héroes en la Sombra", un universo post-Tercera Guerra Mundial. La Bomba 0 abrió brechas dimensionales. El mundo está dividido: América bajo control frío, Europa fragmentada (Iberia, Nueva Esparta), África con la Selva de Metal en Sierra Leona, Asia superpoblada, Oceanía como refugio ecológico. La Zona 0 es un limbo donde mueren los superseres más peligrosos.
+    const systemPrompt = `Eres el Director de Juego de "Legado: Mundo de Héroes", un universo post-Tercera Guerra Mundial donde la humanidad sobrevivió gracias al Pacto de Silencio Global. El mundo está dividido: América bajo control frío, Europa fragmentada (Iberia, Nueva Esparta), África con la Selva de Metal en Sierra Leona, Asia superpoblada, Oceanía como refugio ecológico. La Zona 0 es una dimensión atrapada entre realidades, creada por la Bomba 0.
 
 Tu deber: crear una narrativa épica, sombría y literaria. Nunca menciones reglas, dados ni mecánicas.
 
@@ -28,7 +28,7 @@ Máximo 180 palabras. Sé cinematográfico.`;
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct:free",
+        model: "qwen/qwen2-7b-instruct:free",
         messages: [
           { role: "user", content: systemPrompt },
           { role: "assistant", content: "Entendido." },
