@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
@@ -54,4 +54,4 @@ Máximo 180 palabras por respuesta. Nunca rompas la cuarta pared.`;
     console.error("Error en la IA:", error.message);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
-}
+};
