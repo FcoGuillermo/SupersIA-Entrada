@@ -166,10 +166,6 @@ body{
 </div>
 
 <script>
-let messages = [
-  { role: "assistant", content: "¿Cuál es el nombre de tu personaje?" }
-];
-
 function enterApp() {
   document.getElementById("landing").style.display = "none";
   document.getElementById("app").style.display = "block";
@@ -184,20 +180,16 @@ async function sendMessage() {
   addMessage(message, true);
   input.value = "";
 
-  // Añadir mensaje del usuario al historial
-  messages.push({ role: "user", content: message });
-
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages })
+      body: JSON.stringify({ message })
     });
 
     const data = await response.json();
     if (data.reply) {
       addMessage(data.reply);
-      messages.push({ role: "assistant", content: data.reply });
     } else {
       addMessage("Lo siento, no pude procesar tu solicitud.");
     }
