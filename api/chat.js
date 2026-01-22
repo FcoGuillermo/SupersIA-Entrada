@@ -29,7 +29,7 @@ Máximo 180 palabras por respuesta. Nunca rompas la cuarta pared.`;
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct:free",
+        model: "qwen/qwen2-7b-instruct:free",
         messages: [
           { role: "user", content: systemPrompt },
           { role: "assistant", content: "Entendido. Estoy listo para dirigir tu partida en el mundo de Héroes en la Sombra." },
