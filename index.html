@@ -6,170 +6,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --blue:#288BE4;
-  --red:#f42547;
-  --white:#ffffff;
-  --black:#000000;
+body {
+  margin: 0;
+  background: #288be4;
+  font-family: "Comic Neue", cursive;
+  min-height: 100vh;
+  overflow: hidden;
 }
-*{
-  box-sizing:border-box;
-  font-family:"Comic Neue","Comic Sans MS",cursive;
+#app {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
 }
-body{
-  margin:0;
-  background:var(--blue);
-  min-height:100vh;
-  overflow:hidden;
+.app-header {
+  background: #f42547;
+  color: white;
+  padding: 16px;
+  font-size: 24px;
+  font-weight: bold;
 }
-.side-buttons{
-  position:fixed;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  z-index:10;
+.chat {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 15px;
+  overflow-y: auto;
+  border: none;
 }
-.side-buttons button{
-  background:var(--red);
-  color:white;
-  border:none;
-  padding:14px 20px;
-  font-size:16px;
-  font-weight:bold;
-  border-radius:12px;
-  cursor:pointer;
-  box-shadow:4px 4px 0 var(--black);
+.input-area {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-top: 3px solid black;
 }
-#landing{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
+.input-area input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
 }
-#logo{
-  max-width:320px;
-  width:80%;
-  height:auto;
-  margin-bottom:30px;
-  filter:drop-shadow(4px 4px 0 var(--black));
+.input-area button {
+  background: #f42547;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 black;
 }
-.card{
-  background:white;
-  color:black;
-  padding:30px;
-  border-radius:18px;
-  width:320px;
-  text-align:center;
-  box-shadow:6px 6px 0 var(--black);
+.message {
+  padding: 12px 16px;
+  margin: 10px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-break: break-word;
+  line-height: 1.4;
 }
-.card button{
-  margin-top:20px;
-  width:100%;
-  padding:14px;
-  background:var(--red);
-  color:white;
-  border:none;
-  font-size:18px;
-  font-weight:bold;
-  border-radius:12px;
-  cursor:pointer;
-  box-shadow:4px 4px 0 var(--black);
+.user {
+  background: #ffecec;
+  margin-left: auto;
+  text-align: right;
+  border: 2px solid #f42547;
 }
-#app{
-  position:absolute;
-  inset:0;
-  display:none;
-  padding:30px;
-}
-.app-container{
-  max-width:1000px;
-  margin:auto;
-  height:90vh;
-  background:white;
-  border-radius:18px;
-  box-shadow:8px 8px 0 var(--black);
-  display:flex;
-  flex-direction:column;
-}
-.app-header{
-  background:var(--red);
-  color:white;
-  padding:16px;
-  font-size:24px;
-  font-weight:bold;
-}
-.chat{
-  flex:1;
-  width:100%;
-  background:#f5f5f5;
-  padding:15px;
-  overflow-y:auto;
-  border:none;
-}
-.input-area{
-  display:flex;
-  gap:10px;
-  padding:15px;
-  border-top:3px solid var(--black);
-}
-.input-area input{
-  flex:1;
-  padding:12px;
-  border:2px solid var(--black);
-  border-radius:10px;
-  font-size:16px;
-}
-.input-area button{
-  background:var(--red);
-  color:white;
-  border:none;
-  padding:12px 20px;
-  font-size:16px;
-  font-weight:bold;
-  border-radius:10px;
-  cursor:pointer;
-  box-shadow:3px 3px 0 var(--black);
+.bot {
+  background: #e3f2fd;
+  margin-right: auto;
+  border: 2px solid #288be4;
 }
 </style>
 </head>
 <body>
 
-<div class="side-buttons">
-  <button>📘 Libro</button>
-  <button>🧸 Figuras</button>
-  <button onclick="window.open('https://www.youtube.com/@ImprimeyPinta', '_blank')">▶ YouTube</button>
-</div>
-
-<div id="landing">
-  <img src="img/Logo.png" alt="Logo SupersIA">
-  <div class="card">
-    <p>Bienvenido a la experiencia</p>
-    <button onclick="enterApp()">Entrar</button>
-  </div>
-</div>
-
 <div id="app">
-  <div class="app-container">
-    <div class="app-header">🌌 Legado: Mundo de Héroes</div>
-    <div class="chat" id="chatBox"></div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendMessage()" />
-      <button onclick="sendMessage()">Enviar</button>
-    </div>
+  <div class="app-header">🌌 Legado: Mundo de Héroes</div>
+  <div class="chat" id="chatBox"></div>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendMessage()" />
+    <button onclick="sendMessage()">Enviar</button>
   </div>
 </div>
 
 <script>
-function enterApp() {
-  document.getElementById("landing").style.display = "none";
-  document.getElementById("app").style.display = "block";
-  addMessage("¿Cuál es el nombre de tu personaje?");
+function addMessage(text, isUser = false) {
+  const chatBox = document.getElementById("chatBox");
+  const msg = document.createElement("div");
+  msg.className = isUser ? "message user" : "message bot";
+  msg.innerHTML = text.replace(/\n/g, "<br>");
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 async function sendMessage() {
@@ -191,36 +119,15 @@ async function sendMessage() {
     if (data.reply) {
       addMessage(data.reply);
     } else {
-      addMessage("Lo siento, no pude procesar tu solicitud.");
+      addMessage("No tengo respuesta.");
     }
   } catch (error) {
-    addMessage("Error al conectar con la IA. ¿Estás conectado a internet?");
+    addMessage("Error al conectar con la IA.");
   }
 }
 
-function addMessage(text, isUser = false) {
-  const chatBox = document.getElementById("chatBox");
-  const msg = document.createElement("div");
-  msg.style.padding = "12px 16px";
-  msg.style.margin = "10px";
-  msg.style.borderRadius = "12px";
-  msg.style.maxWidth = "80%";
-  msg.style.wordBreak = "break-word";
-  msg.style.lineHeight = "1.4";
-  if (isUser) {
-    msg.style.backgroundColor = "#ffecec";
-    msg.style.marginLeft = "auto";
-    msg.style.textAlign = "right";
-    msg.style.border = "2px solid var(--red)";
-  } else {
-    msg.style.backgroundColor = "#e3f2fd";
-    msg.style.marginRight = "auto";
-    msg.style.border = "2px solid var(--blue)";
-  }
-  msg.innerHTML = text.replace(/\n/g, "<br>");
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+// Iniciar con un mensaje de bienvenida
+addMessage("¡Hola! Soy tu asistente de SupersIA. ¿En qué puedo ayudarte?");
 </script>
 
 </body>
