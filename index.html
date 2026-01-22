@@ -6,77 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body {
-  margin: 0;
-  background: #288be4;
-  font-family: "Comic Neue", cursive;
-  min-height: 100vh;
-  overflow: hidden;
-}
-#app {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-}
-.app-header {
-  background: #f42547;
-  color: white;
-  padding: 16px;
-  font-size: 24px;
-  font-weight: bold;
-}
-.chat {
-  flex: 1;
-  background: #f5f5f5;
-  padding: 15px;
-  overflow-y: auto;
-  border: none;
-}
-.input-area {
-  display: flex;
-  gap: 10px;
-  padding: 15px;
-  border-top: 3px solid black;
-}
-.input-area input {
-  flex: 1;
-  padding: 12px;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-size: 16px;
-}
-.input-area button {
-  background: #f42547;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 black;
-}
-.message {
-  padding: 12px 16px;
-  margin: 10px;
-  border-radius: 12px;
-  max-width: 80%;
-  word-break: break-word;
-  line-height: 1.4;
-}
-.user {
-  background: #ffecec;
-  margin-left: auto;
-  text-align: right;
-  border: 2px solid #f42547;
-}
-.bot {
-  background: #e3f2fd;
-  margin-right: auto;
-  border: 2px solid #288be4;
-}
+body{margin:0;background:#288BE4;font-family:"Comic Neue",cursive;min-height:100vh;overflow:hidden}
+#app{position:absolute;inset:0;display:flex;flex-direction:column;padding:30px}
+.app-header{background:#f42547;color:white;padding:16px;font-size:24px;font-weight:bold}
+.chat{flex:1;background:#f5f5f5;padding:15px;overflow-y:auto;border:none}
+.input-area{display:flex;gap:10px;padding:15px;border-top:3px solid black}
+.input-area input{flex:1;padding:12px;border:2px solid black;border-radius:10px;font-size:16px}
+.input-area button{background:#f42547;color:white;border:none;padding:12px 20px;font-size:16px;font-weight:bold;border-radius:10px;cursor:pointer;box-shadow:3px 3px 0 black}
+.message{padding:12px 16px;margin:10px;border-radius:12px;max-width:80%;word-break:break-word;line-height:1.4}
+.user{background:#ffecec;margin-left:auto;text-align:right;border:2px solid #f42547}
+.bot{background:#e3f2fd;margin-right:auto;border:2px solid #288BE4}
 </style>
 </head>
 <body>
@@ -119,15 +58,14 @@ async function sendMessage() {
     if (data.reply) {
       addMessage(data.reply);
     } else {
-      addMessage("No tengo respuesta.");
+      addMessage("La IA no respondió.");
     }
   } catch (error) {
     addMessage("Error al conectar con la IA.");
   }
 }
 
-// Iniciar con un mensaje de bienvenida
-addMessage("¡Hola! Soy tu asistente de SupersIA. ¿En qué puedo ayudarte?");
+addMessage("¿Cuál es el nombre de tu personaje?");
 </script>
 
 </body>
