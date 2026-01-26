@@ -31,7 +31,7 @@ Contexto del mundo:
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${key}`,
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
         "HTTP-Referer": "https://fcogullermo.github.io",
         "X-Title": "HeroesEnLaSombra"
