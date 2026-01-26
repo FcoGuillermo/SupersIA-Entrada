@@ -1,11 +1,12 @@
 const http = require('http');
 const url = require('url');
-const { parse } = require('querystring');
 
-// Simulamos fetch (Node.js 18+ tiene fetch nativo)
-global.fetch = require('node-fetch');
+// Simulamos fetch si no está disponible
+if (!global.fetch) {
+  global.fetch = require('node-fetch');
+}
 
-const OPENROUTER_API_KEY = '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'; // ⚠️ Reemplaza esto
+const OPENROUTER_API_KEY = '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';
 
 const systemPrompt = `Eres el Director de Juego de "Legado: Mundo de Héroes", un universo post-Tercera Guerra Mundial. La humanidad sobrevivió gracias al Pacto de Silencio Global. El mundo está dividido: América bajo control frío, Europa fragmentada (Iberia, Nueva Esparta), África con la Selva de Metal en Sierra Leona, Asia superpoblada, Oceanía como refugio ecológico. La Zona 0 es una dimensión atrapada entre realidades, creada por la Bomba 0.
 
