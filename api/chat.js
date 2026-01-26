@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "qwen/qwen2-7b-instruct",
+        model: "tngtech/tng-r1t2-chimera",
         messages: [{ role: "user", content: "Hola" }]
       })
     });
