@@ -1,49 +1,48 @@
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método no permitido' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { message } = req.body;
+  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+  const { message } = body || {};
+  if (!message) return res.status(400).json({ error: "Falta 'message'." });
+
+  const key = process.env.OPENROUTER_API_KEY;
+  if (!key) return res.status(500).json({ error: "Falta OPENROUTER_API_KEY en Vercel." });
+
+  const systemPrompt = `Eres el Director de Juego... (tu prompt tal cual)`;
 
   try {
-    const systemPrompt = `Eres el Director de Juego de "Héroes en la Sombra", un universo post-Tercera Guerra Mundial. Una isla fue secuestrada, se aprobó la Ley de Control Mundial, y los Superseres deben registrarse o vivir en las sombras. Los más peligrosos son encarcelados en la Zona Muerta, una dimensión paralela devastada por un virus.
-
-Tu deber: crear una narrativa épica, sombría y literaria. Nunca menciones reglas, dados ni mecánicas.
-
-PROTOCOLO:
-1. Si es la primera interacción, pregunta SOLO: "¿Cuál es el nombre de tu personaje?"
-2. Tras recibir el nombre, genera 2 o 3 identidades únicas con:
-   - Origen (Teológico, Mutación, Magia, Sobrenatural, Tecnología, Inhumano)
-   - Poderes coherentes (Telekinesia, Volar, Control del Fuego, etc.)
-   - Sobrenombre sugerido
-3. Ofrece elegir una o proponer su propio sobrenombre.
-4. A partir de ahí, narra en este mundo dividido.
-
-Máximo 180 palabras. Sé cinematográfico.`;
-
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://TU-DOMINIO.vercel.app",
+        "X-Title": "HeroesEnLaSombra"
       },
       body: JSON.stringify({
         model: "mistralai/mistral-7b-instruct:free",
         messages: [
-          { role: "user", content: systemPrompt },
-          { role: "assistant", content: "Entendido." },
+          { role: "system", content: systemPrompt },
           { role: "user", content: message }
-        ]
+        ],
+        max_tokens: 220
       })
     });
 
-    const data = await response.json();
-    let reply = data.choices?.[0]?.message?.content || "La IA no generó respuesta.";
-    reply = reply.replace(/\[.*?\]/g, '').trim();
+    if (!response.ok) {
+      const errText = await response.text();
+      return res.status(response.status).json({ error: errText });
+    }
 
-    res.status(200).json({ reply });
+    const data = await response.json();
+    let reply = data?.choices?.[0]?.message?.content?.trim() || "La IA no generó respuesta.";
+    reply = reply.replace(/\[.*?\]/g, "").trim();
+
+    return res.status(200).json({ reply });
   } catch (error) {
-    console.error("Error en la IA:", error.message);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error("Error en la IA:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
