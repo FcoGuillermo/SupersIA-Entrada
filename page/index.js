@@ -16,7 +16,7 @@ export default function Home() {
     input.value = "";
 
     try {
-      const response = await fetch(''https://supersia.onrender.com/chat', {
+      const response = await fetch(''https://fcoguillermo-github-io.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
