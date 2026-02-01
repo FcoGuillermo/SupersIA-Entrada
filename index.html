@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blue:#196198; /* Color correcto (R25 G57 B92) */
+  --blue:#196198;
   --red:#f42547;
   --white:#ffffff;
   --black:#000000;
@@ -129,7 +129,7 @@ body{
   padding:15px;
   overflow-y:auto;
   border:none;
-  color: #000; /* TEXTO NEGRO EN EL CHAT */
+  color: #000;
 }
 .input-area{
   display:flex;
@@ -160,16 +160,20 @@ body{
 /* ===== RESPONSIVE (BOTONES EN EL FONDO) ===== */
 @media (max-width: 768px) {
   .side-buttons {
-    right: 10px;
-    gap: 10px;
-    top: auto;
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100% - 30px);
     bottom: 15px;
+    top: auto;
+    right: auto;
+    left: 15px;
     transform: none;
+    gap: 10px;
   }
   
   .side-buttons button {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
   
   #logo {
@@ -221,16 +225,20 @@ body{
 
 @media (max-width: 480px) {
   .side-buttons {
-    right: 5px;
-    gap: 8px;
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100% - 20px);
+    bottom: 10px;
     top: auto;
-    bottom: 15px;
+    right: auto;
+    left: 10px;
     transform: none;
+    gap: 8px;
   }
   
   .side-buttons button {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
   }
   
   #logo {
@@ -366,7 +374,7 @@ function addMessage(text, isUser = false) {
   msg.style.maxWidth = "80%";
   msg.style.wordBreak = "break-word";
   msg.style.lineHeight = "1.4";
-  msg.style.color = "#000"; /* TEXTO NEGRO EN LOS MENSAJES */
+  msg.style.color = "#000";
   if (isUser) {
     msg.style.backgroundColor = "#ffecec";
     msg.style.marginLeft = "auto";
