@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (!message) return res.status(400).json({ error: 'Falta mensaje' });
 
   try {
-    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', { // 🔴 Eliminé los espacios extra
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -18,11 +18,21 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "deepseek/deepseek-r1-0528",
         messages: [
-          { role: "user", content: `Eres el Director de Juego de "Legado: Mundo de Héroes". Crea narrativa épica y sombría. Nunca menciones reglas. Pregunta SOLO: "¿Cuál es el nombre de tu personaje?"` },
+          { 
+            role: "user", 
+            content: `Eres el Director de Juego de "Legado: Mundo de Héroes". 
+            Crea narrativa épica y sombría de superheroes en un mundo de heroes y villanos. 
+            Nunca menciones reglas. 
+            Pregunta: "¿Cuál es el nombre de tu personaje?".
+            Asigna al "user" un sobrenombre de heroe y unos poderes.
+            Mantén respuestas breves y atmosféricas.
+            No uses emojis ni caracteres especiales.
+            Responde siempre en el idioma del usuario.`
+          },
           { role: "assistant", content: "Entendido." },
           { role: "user", content: message }
         ],
-        max_tokens: 220
+        max_tokens: 9999 // ✅ Sin límite
       })
     });
 
